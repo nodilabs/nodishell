@@ -1,0 +1,41 @@
+<?php
+
+
+
+namespace {{ namespace }};
+
+use {{ baseClassNamespace }};
+
+final class {{ class }} extends BaseCategory
+{
+    protected int $sortOrder = {{ sortOrder }};
+
+    public function getName(): string
+    {
+        return '{{ categoryName }}';
+    }
+
+    public function getDescription(): string
+    {
+        return '{{ description }}';
+    }
+
+    public function getIcon(): string
+    {
+        return '{{ icon }}';
+    }
+
+    public function getColor(): string
+    {
+        return '{{ color }}';
+    }
+
+    protected function loadScripts(): void
+    {
+        // Load scripts for this category
+        $this->scripts = [
+            // Add your scripts here
+            // new SomeScript,
+        ];
+    }
+}

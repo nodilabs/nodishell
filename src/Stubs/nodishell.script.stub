@@ -1,0 +1,57 @@
+<?php
+
+
+
+namespace {{ namespace }};
+
+use {{ baseClassNamespace }};
+
+final class {{ class }} extends BaseScript
+{
+    protected string $name = '{{ scriptName }}';
+
+    protected string $description = '{{ description }}';
+
+    protected string $category = '{{ category }}';
+
+    protected bool $productionSafe = {{ productionSafe }};
+
+    protected array $parameters = [
+        // Add parameters here
+        // [
+        //     'name' => 'parameter_name',
+        //     'label' => 'Parameter Label',
+        //     'type' => 'string',
+        //     'description' => 'Parameter description',
+        // ],
+    ];
+
+    protected array $tags = ['{{ tags }}'];
+
+    public function execute(array $parameters = []): mixed
+    {
+        try {
+            // Access session and variables
+            $session = $parameters['_session'] ?? null;
+            $variables = $parameters['_variables'] ?? [];
+
+            // Your script logic here
+
+            return [
+                'success' => true,
+                'data' => null,
+                'message' => 'Script executed successfully',
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public function getPreview(): string
+    {
+        return '{{ description }}';
+    }
+}

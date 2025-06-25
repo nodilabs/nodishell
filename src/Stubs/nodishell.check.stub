@@ -1,0 +1,43 @@
+<?php
+
+
+
+namespace {{ namespace }};
+
+use {{ contractNamespace }};
+use {{ dataNamespace }};
+
+final class {{ class }} implements SystemCheckInterface
+{
+    public function getLabel(): string
+    {
+        return '{{ label }}';
+    }
+
+    public function getDescription(): string
+    {
+        return '{{ description }}';
+    }
+
+    public function run(): array
+    {
+        $results = [];
+
+        try {
+            // Your check logic here
+
+            $results[] = new CheckResultData(
+                successful: true,
+                message: '{{ label }}: OK'
+            );
+
+        } catch (\Exception $e) {
+            $results[] = new CheckResultData(
+                successful: false,
+                message: '{{ label }}: FAILED - ' . $e->getMessage()
+            );
+        }
+
+        return $results;
+    }
+}
