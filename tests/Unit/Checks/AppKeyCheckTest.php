@@ -7,7 +7,7 @@ use NodiLabs\NodiShell\Data\CheckResultData;
 
 describe('AppKeyCheck', function () {
     beforeEach(function () {
-        $this->check = new AppKeyCheck();
+        $this->check = new AppKeyCheck;
     });
 
     it('has correct label', function () {

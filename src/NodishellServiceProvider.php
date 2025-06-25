@@ -2,7 +2,6 @@
 
 namespace NodiLabs\NodiShell;
 
-use NodiLabs\NodiShell\Commands\BaseNodiShellGeneratorCommand;
 use NodiLabs\NodiShell\Commands\MakeCategoryCommand;
 use NodiLabs\NodiShell\Commands\MakeCheckCommand;
 use NodiLabs\NodiShell\Commands\MakeScriptCommand;

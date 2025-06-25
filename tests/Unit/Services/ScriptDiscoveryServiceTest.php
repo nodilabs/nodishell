@@ -2,69 +2,215 @@
 
 namespace NodiLabs\NodiShell\Tests\Unit\Services;
 
-use NodiLabs\NodiShell\Services\ScriptDiscoveryService;
-use NodiLabs\NodiShell\Services\CategoryDiscoveryService;
 use NodiLabs\NodiShell\Contracts\CategoryInterface;
 use NodiLabs\NodiShell\Contracts\ScriptInterface;
+use NodiLabs\NodiShell\Services\CategoryDiscoveryService;
+use NodiLabs\NodiShell\Services\ScriptDiscoveryService;
 
 describe('ScriptDiscoveryService', function () {
     beforeEach(function () {
-        $this->categoryService = new CategoryDiscoveryService();
+        $this->categoryService = new CategoryDiscoveryService;
         $this->service = new ScriptDiscoveryService($this->categoryService);
 
         // Create mock scripts
-        $this->script1 = new class implements ScriptInterface {
-            public function getName(): string { return 'user-create'; }
-            public function getDescription(): string { return 'Create a new user'; }
-            public function getTags(): array { return ['user', 'create']; }
-            public function getCategory(): string { return 'users'; }
-            public function isProductionSafe(): bool { return false; }
-            public function getPreview(): ?string { return null; }
-            public function execute(array $parameters): mixed { return null; }
-            public function getParameters(): array { return []; }
+        $this->script1 = new class implements ScriptInterface
+        {
+            public function getName(): string
+            {
+                return 'user-create';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Create a new user';
+            }
+
+            public function getTags(): array
+            {
+                return ['user', 'create'];
+            }
+
+            public function getCategory(): string
+            {
+                return 'users';
+            }
+
+            public function isProductionSafe(): bool
+            {
+                return false;
+            }
+
+            public function getPreview(): ?string
+            {
+                return null;
+            }
+
+            public function execute(array $parameters): mixed
+            {
+                return null;
+            }
+
+            public function getParameters(): array
+            {
+                return [];
+            }
         };
 
-        $this->script2 = new class implements ScriptInterface {
-            public function getName(): string { return 'user-delete'; }
-            public function getDescription(): string { return 'Delete a user'; }
-            public function getTags(): array { return ['user', 'delete']; }
-            public function getCategory(): string { return 'users'; }
-            public function isProductionSafe(): bool { return false; }
-            public function getPreview(): ?string { return null; }
-            public function execute(array $parameters): mixed { return null; }
-            public function getParameters(): array { return []; }
+        $this->script2 = new class implements ScriptInterface
+        {
+            public function getName(): string
+            {
+                return 'user-delete';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Delete a user';
+            }
+
+            public function getTags(): array
+            {
+                return ['user', 'delete'];
+            }
+
+            public function getCategory(): string
+            {
+                return 'users';
+            }
+
+            public function isProductionSafe(): bool
+            {
+                return false;
+            }
+
+            public function getPreview(): ?string
+            {
+                return null;
+            }
+
+            public function execute(array $parameters): mixed
+            {
+                return null;
+            }
+
+            public function getParameters(): array
+            {
+                return [];
+            }
         };
 
-        $this->script3 = new class implements ScriptInterface {
-            public function getName(): string { return 'cache-clear'; }
-            public function getDescription(): string { return 'Clear application cache'; }
-            public function getTags(): array { return ['cache', 'clear']; }
-            public function getCategory(): string { return 'maintenance'; }
-            public function isProductionSafe(): bool { return true; }
-            public function getPreview(): ?string { return null; }
-            public function execute(array $parameters): mixed { return null; }
-            public function getParameters(): array { return []; }
+        $this->script3 = new class implements ScriptInterface
+        {
+            public function getName(): string
+            {
+                return 'cache-clear';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Clear application cache';
+            }
+
+            public function getTags(): array
+            {
+                return ['cache', 'clear'];
+            }
+
+            public function getCategory(): string
+            {
+                return 'maintenance';
+            }
+
+            public function isProductionSafe(): bool
+            {
+                return true;
+            }
+
+            public function getPreview(): ?string
+            {
+                return null;
+            }
+
+            public function execute(array $parameters): mixed
+            {
+                return null;
+            }
+
+            public function getParameters(): array
+            {
+                return [];
+            }
         };
 
         // Create mock categories with scripts
-        $userCategory = new class($this->script1, $this->script2) implements CategoryInterface {
+        $userCategory = new class($this->script1, $this->script2) implements CategoryInterface
+        {
             public function __construct(private $script1, private $script2) {}
-            public function getName(): string { return 'Users'; }
-            public function getDescription(): string { return 'User management'; }
-            public function getIcon(): string { return '👥'; }
-            public function getSortOrder(): int { return 1; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return [$this->script1, $this->script2]; }
+
+            public function getName(): string
+            {
+                return 'Users';
+            }
+
+            public function getDescription(): string
+            {
+                return 'User management';
+            }
+
+            public function getIcon(): string
+            {
+                return '👥';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 1;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [$this->script1, $this->script2];
+            }
         };
 
-        $maintenanceCategory = new class($this->script3) implements CategoryInterface {
+        $maintenanceCategory = new class($this->script3) implements CategoryInterface
+        {
             public function __construct(private $script3) {}
-            public function getName(): string { return 'Maintenance'; }
-            public function getDescription(): string { return 'System maintenance'; }
-            public function getIcon(): string { return '🔧'; }
-            public function getSortOrder(): int { return 2; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return [$this->script3]; }
+
+            public function getName(): string
+            {
+                return 'Maintenance';
+            }
+
+            public function getDescription(): string
+            {
+                return 'System maintenance';
+            }
+
+            public function getIcon(): string
+            {
+                return '🔧';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 2;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [$this->script3];
+            }
         };
 
         $this->categoryService->registerCategory('users', $userCategory);
@@ -76,7 +222,7 @@ describe('ScriptDiscoveryService', function () {
 
         expect($results)->toHaveCount(2);
 
-        $scriptNames = $results->map(fn($script) => $script->getName())->toArray();
+        $scriptNames = $results->map(fn ($script) => $script->getName())->toArray();
         expect($scriptNames)->toContain('user-create');
         expect($scriptNames)->toContain('user-delete');
     });
@@ -128,25 +274,82 @@ describe('ScriptDiscoveryService', function () {
         expect($results1)->toHaveCount(2);
 
         // Add a new category with script (this won't be found since it's cached)
-        $newScript = new class implements ScriptInterface {
-            public function getName(): string { return 'user-update'; }
-            public function getDescription(): string { return 'Update user'; }
-            public function getTags(): array { return ['user']; }
-            public function getCategory(): string { return 'users'; }
-            public function isProductionSafe(): bool { return false; }
-            public function getPreview(): ?string { return null; }
-            public function execute(array $parameters): mixed { return null; }
-            public function getParameters(): array { return []; }
+        $newScript = new class implements ScriptInterface
+        {
+            public function getName(): string
+            {
+                return 'user-update';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Update user';
+            }
+
+            public function getTags(): array
+            {
+                return ['user'];
+            }
+
+            public function getCategory(): string
+            {
+                return 'users';
+            }
+
+            public function isProductionSafe(): bool
+            {
+                return false;
+            }
+
+            public function getPreview(): ?string
+            {
+                return null;
+            }
+
+            public function execute(array $parameters): mixed
+            {
+                return null;
+            }
+
+            public function getParameters(): array
+            {
+                return [];
+            }
         };
 
-        $newCategory = new class($newScript) implements CategoryInterface {
+        $newCategory = new class($newScript) implements CategoryInterface
+        {
             public function __construct(private $newScript) {}
-            public function getName(): string { return 'New Users'; }
-            public function getDescription(): string { return 'New user management'; }
-            public function getIcon(): string { return '👤'; }
-            public function getSortOrder(): int { return 3; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return [$this->newScript]; }
+
+            public function getName(): string
+            {
+                return 'New Users';
+            }
+
+            public function getDescription(): string
+            {
+                return 'New user management';
+            }
+
+            public function getIcon(): string
+            {
+                return '👤';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 3;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [$this->newScript];
+            }
         };
 
         $this->categoryService->registerCategory('new-users', $newCategory);

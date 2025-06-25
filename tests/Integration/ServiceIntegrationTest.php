@@ -2,18 +2,18 @@
 
 namespace NodiLabs\NodiShell\Tests\Integration;
 
+use NodiLabs\NodiShell\Contracts\ScriptInterface;
 use NodiLabs\NodiShell\Services\CategoryDiscoveryService;
 use NodiLabs\NodiShell\Services\ScriptDiscoveryService;
 use NodiLabs\NodiShell\Services\ShellSessionService;
 use NodiLabs\NodiShell\Tests\Fixtures\TestCategory;
 use NodiLabs\NodiShell\Tests\Fixtures\TestScript;
-use NodiLabs\NodiShell\Contracts\ScriptInterface;
 
 describe('Service Integration', function () {
     beforeEach(function () {
-        $this->categoryService = new CategoryDiscoveryService();
+        $this->categoryService = new CategoryDiscoveryService;
         $this->scriptService = new ScriptDiscoveryService($this->categoryService);
-        $this->sessionService = new ShellSessionService();
+        $this->sessionService = new ShellSessionService;
     });
 
     it('can discover and search scripts across categories', function () {
@@ -49,14 +49,42 @@ describe('Service Integration', function () {
 
     it('can execute scripts with session context', function () {
         // Create a script that uses session data
-        $script = new class implements ScriptInterface {
-            public function getName(): string { return 'session-test'; }
-            public function getDescription(): string { return 'Session test script'; }
-            public function getTags(): array { return ['test']; }
-            public function getCategory(): string { return 'test'; }
-            public function isProductionSafe(): bool { return true; }
-            public function getPreview(): ?string { return null; }
-            public function getParameters(): array { return []; }
+        $script = new class implements ScriptInterface
+        {
+            public function getName(): string
+            {
+                return 'session-test';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Session test script';
+            }
+
+            public function getTags(): array
+            {
+                return ['test'];
+            }
+
+            public function getCategory(): string
+            {
+                return 'test';
+            }
+
+            public function isProductionSafe(): bool
+            {
+                return true;
+            }
+
+            public function getPreview(): ?string
+            {
+                return null;
+            }
+
+            public function getParameters(): array
+            {
+                return [];
+            }
 
             public function execute(array $parameters): mixed
             {
@@ -66,7 +94,7 @@ describe('Service Integration', function () {
                 return [
                     'session_provided' => $session !== null,
                     'variables_count' => count($variables),
-                    'parameters' => $parameters
+                    'parameters' => $parameters,
                 ];
             }
         };
@@ -79,7 +107,7 @@ describe('Service Integration', function () {
         $result = $script->execute([
             '_session' => $this->sessionService,
             '_variables' => $this->sessionService->getAllVariables(),
-            'custom_param' => 'test_value'
+            'custom_param' => 'test_value',
         ]);
 
         expect($result['session_provided'])->toBeTrue();

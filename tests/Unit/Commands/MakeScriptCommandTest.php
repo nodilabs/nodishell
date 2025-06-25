@@ -2,12 +2,12 @@
 
 namespace NodiLabs\NodiShell\Tests\Unit\Commands;
 
-use NodiLabs\NodiShell\Commands\MakeScriptCommand;
 use Illuminate\Filesystem\Filesystem;
+use NodiLabs\NodiShell\Commands\MakeScriptCommand;
 
 describe('MakeScriptCommand', function () {
     beforeEach(function () {
-        $this->files = new Filesystem();
+        $this->files = new Filesystem;
         $this->command = new MakeScriptCommand($this->files);
     });
 

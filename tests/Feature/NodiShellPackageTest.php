@@ -2,12 +2,12 @@
 
 namespace NodiLabs\NodiShell\Tests\Feature;
 
+use NodiLabs\NodiShell\Checks\AppKeyCheck;
 use NodiLabs\NodiShell\NodiShellServiceProvider;
 use NodiLabs\NodiShell\Services\CategoryDiscoveryService;
 use NodiLabs\NodiShell\Services\ScriptDiscoveryService;
 use NodiLabs\NodiShell\Services\ShellSessionService;
 use NodiLabs\NodiShell\Services\SystemCheckService;
-use NodiLabs\NodiShell\Checks\AppKeyCheck;
 
 describe('NodiShell Package', function () {
     it('registers all required services', function () {
@@ -59,7 +59,7 @@ describe('NodiShell Package', function () {
         expect($checks->count())->toBeGreaterThan(0);
 
         // Test that we can run the checks
-        $appKeyCheck = $checks->first(fn($check) => $check instanceof AppKeyCheck);
+        $appKeyCheck = $checks->first(fn ($check) => $check instanceof AppKeyCheck);
         expect($appKeyCheck)->not()->toBeNull();
 
         $results = $appKeyCheck->run();

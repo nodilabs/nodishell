@@ -2,12 +2,12 @@
 
 namespace NodiLabs\NodiShell\Tests\Unit\Contracts;
 
-use NodiLabs\NodiShell\Contracts\ScriptInterface;
 use NodiLabs\NodiShell\Contracts\CategoryInterface;
+use NodiLabs\NodiShell\Contracts\ScriptInterface;
 use NodiLabs\NodiShell\Contracts\SystemCheckInterface;
 use NodiLabs\NodiShell\Data\CheckResultData;
-use NodiLabs\NodiShell\Tests\Fixtures\TestScript;
 use NodiLabs\NodiShell\Tests\Fixtures\TestCategory;
+use NodiLabs\NodiShell\Tests\Fixtures\TestScript;
 
 describe('Contracts', function () {
     describe('ScriptInterface', function () {
@@ -99,7 +99,8 @@ describe('Contracts', function () {
 
     describe('SystemCheckInterface', function () {
         beforeEach(function () {
-            $this->check = new class implements SystemCheckInterface {
+            $this->check = new class implements SystemCheckInterface
+            {
                 public function getLabel(): string
                 {
                     return 'Test System Check';

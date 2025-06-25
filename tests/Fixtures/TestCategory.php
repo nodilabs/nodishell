@@ -48,6 +48,7 @@ class TestCategory implements CategoryInterface
     public function setScripts(array $scripts): self
     {
         $this->scripts = $scripts;
+
         return $this;
     }
 }

@@ -6,7 +6,7 @@ use NodiLabs\NodiShell\Services\ShellSessionService;
 
 describe('ShellSessionService', function () {
     beforeEach(function () {
-        $this->service = new ShellSessionService();
+        $this->service = new ShellSessionService;
     });
 
     describe('History Management', function () {
@@ -18,7 +18,7 @@ describe('ShellSessionService', function () {
         });
 
         it('maintains history limit', function () {
-            $service = new ShellSessionService();
+            $service = new ShellSessionService;
 
             // Add 102 commands (exceeding the default limit of 100)
             for ($i = 1; $i <= 102; $i++) {

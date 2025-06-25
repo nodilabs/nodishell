@@ -2,18 +2,19 @@
 
 namespace NodiLabs\NodiShell\Tests\Unit\Services;
 
-use NodiLabs\NodiShell\Services\SystemCheckService;
 use NodiLabs\NodiShell\Contracts\SystemCheckInterface;
 use NodiLabs\NodiShell\Data\CheckResultData;
+use NodiLabs\NodiShell\Services\SystemCheckService;
 
 describe('SystemCheckService', function () {
 
     it('can register a system check', function () {
         // Create a fresh service without config interference
         config(['nodishell.system_checks' => []]);
-        $service = new SystemCheckService();
+        $service = new SystemCheckService;
 
-        $check = new class implements SystemCheckInterface {
+        $check = new class implements SystemCheckInterface
+        {
             public function getLabel(): string
             {
                 return 'Test Check';
@@ -35,16 +36,32 @@ describe('SystemCheckService', function () {
     it('can register multiple system checks', function () {
         // Create a fresh service without config interference
         config(['nodishell.system_checks' => []]);
-        $service = new SystemCheckService();
+        $service = new SystemCheckService;
 
-        $check1 = new class implements SystemCheckInterface {
-            public function getLabel(): string { return 'Check 1'; }
-            public function run(): array { return []; }
+        $check1 = new class implements SystemCheckInterface
+        {
+            public function getLabel(): string
+            {
+                return 'Check 1';
+            }
+
+            public function run(): array
+            {
+                return [];
+            }
         };
 
-        $check2 = new class implements SystemCheckInterface {
-            public function getLabel(): string { return 'Check 2'; }
-            public function run(): array { return []; }
+        $check2 = new class implements SystemCheckInterface
+        {
+            public function getLabel(): string
+            {
+                return 'Check 2';
+            }
+
+            public function run(): array
+            {
+                return [];
+            }
         };
 
         $service->register($check1);
@@ -57,10 +74,10 @@ describe('SystemCheckService', function () {
     it('loads checks from config on first access', function () {
         // Set up config with mock check classes
         config(['nodishell.system_checks' => [
-            \NodiLabs\NodiShell\Checks\AppKeyCheck::class
+            \NodiLabs\NodiShell\Checks\AppKeyCheck::class,
         ]]);
 
-        $service = new SystemCheckService();
+        $service = new SystemCheckService;
         $checks = $service->getChecks();
 
         expect($checks->count())->toBeGreaterThan(0);
@@ -70,10 +87,10 @@ describe('SystemCheckService', function () {
     it('handles invalid check classes in config gracefully', function () {
         config(['nodishell.system_checks' => [
             'NonExistentClass',
-            \NodiLabs\NodiShell\Checks\AppKeyCheck::class
+            \NodiLabs\NodiShell\Checks\AppKeyCheck::class,
         ]]);
 
-        $service = new SystemCheckService();
+        $service = new SystemCheckService;
         $checks = $service->getChecks();
 
         // Should only load the valid class
@@ -83,10 +100,10 @@ describe('SystemCheckService', function () {
 
     it('only initializes once', function () {
         config(['nodishell.system_checks' => [
-            \NodiLabs\NodiShell\Checks\AppKeyCheck::class
+            \NodiLabs\NodiShell\Checks\AppKeyCheck::class,
         ]]);
 
-        $service = new SystemCheckService();
+        $service = new SystemCheckService;
         $checks1 = $service->getChecks();
         $checks2 = $service->getChecks();
 

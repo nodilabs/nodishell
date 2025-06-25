@@ -2,23 +2,47 @@
 
 namespace NodiLabs\NodiShell\Tests\Unit\Services;
 
-use NodiLabs\NodiShell\Services\CategoryDiscoveryService;
 use NodiLabs\NodiShell\Contracts\CategoryInterface;
 use NodiLabs\NodiShell\Contracts\ScriptInterface;
+use NodiLabs\NodiShell\Services\CategoryDiscoveryService;
 
 describe('CategoryDiscoveryService', function () {
     beforeEach(function () {
-        $this->service = new CategoryDiscoveryService();
+        $this->service = new CategoryDiscoveryService;
     });
 
     it('can register a category manually', function () {
-        $category = new class implements CategoryInterface {
-            public function getName(): string { return 'Test Category'; }
-            public function getDescription(): string { return 'Test Description'; }
-            public function getIcon(): string { return '🧪'; }
-            public function getSortOrder(): int { return 1; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return []; }
+        $category = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Test Category';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Test Description';
+            }
+
+            public function getIcon(): string
+            {
+                return '🧪';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 1;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
         $this->service->registerCategory('test', $category);
@@ -27,22 +51,70 @@ describe('CategoryDiscoveryService', function () {
     });
 
     it('can get all categories', function () {
-        $category1 = new class implements CategoryInterface {
-            public function getName(): string { return 'Category 1'; }
-            public function getDescription(): string { return 'Description 1'; }
-            public function getIcon(): string { return '🧪'; }
-            public function getSortOrder(): int { return 1; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return []; }
+        $category1 = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Category 1';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description 1';
+            }
+
+            public function getIcon(): string
+            {
+                return '🧪';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 1;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
-        $category2 = new class implements CategoryInterface {
-            public function getName(): string { return 'Category 2'; }
-            public function getDescription(): string { return 'Description 2'; }
-            public function getIcon(): string { return '⚡'; }
-            public function getSortOrder(): int { return 2; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return []; }
+        $category2 = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Category 2';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description 2';
+            }
+
+            public function getIcon(): string
+            {
+                return '⚡';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 2;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
         $this->service->registerCategory('cat1', $category1);
@@ -59,22 +131,70 @@ describe('CategoryDiscoveryService', function () {
     });
 
     it('filters enabled categories only', function () {
-        $enabledCategory = new class implements CategoryInterface {
-            public function getName(): string { return 'Enabled'; }
-            public function getDescription(): string { return 'Description'; }
-            public function getIcon(): string { return '✅'; }
-            public function getSortOrder(): int { return 1; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return []; }
+        $enabledCategory = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Enabled';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description';
+            }
+
+            public function getIcon(): string
+            {
+                return '✅';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 1;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
-        $disabledCategory = new class implements CategoryInterface {
-            public function getName(): string { return 'Disabled'; }
-            public function getDescription(): string { return 'Description'; }
-            public function getIcon(): string { return '❌'; }
-            public function getSortOrder(): int { return 2; }
-            public function isEnabled(): bool { return false; }
-            public function getScripts(): array { return []; }
+        $disabledCategory = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Disabled';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description';
+            }
+
+            public function getIcon(): string
+            {
+                return '❌';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 2;
+            }
+
+            public function isEnabled(): bool
+            {
+                return false;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
         $this->service->registerCategory('enabled', $enabledCategory);
@@ -86,31 +206,103 @@ describe('CategoryDiscoveryService', function () {
     });
 
     it('sorts categories by sort order', function () {
-        $category1 = new class implements CategoryInterface {
-            public function getName(): string { return 'Category 1'; }
-            public function getDescription(): string { return 'Description 1'; }
-            public function getIcon(): string { return '🧪'; }
-            public function getSortOrder(): int { return 3; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return []; }
+        $category1 = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Category 1';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description 1';
+            }
+
+            public function getIcon(): string
+            {
+                return '🧪';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 3;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
-        $category2 = new class implements CategoryInterface {
-            public function getName(): string { return 'Category 2'; }
-            public function getDescription(): string { return 'Description 2'; }
-            public function getIcon(): string { return '⚡'; }
-            public function getSortOrder(): int { return 1; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return []; }
+        $category2 = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Category 2';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description 2';
+            }
+
+            public function getIcon(): string
+            {
+                return '⚡';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 1;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
-        $category3 = new class implements CategoryInterface {
-            public function getName(): string { return 'Category 3'; }
-            public function getDescription(): string { return 'Description 3'; }
-            public function getIcon(): string { return '🚀'; }
-            public function getSortOrder(): int { return 2; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return []; }
+        $category3 = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Category 3';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description 3';
+            }
+
+            public function getIcon(): string
+            {
+                return '🚀';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 2;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
         $this->service->registerCategory('cat1', $category1);
@@ -126,25 +318,82 @@ describe('CategoryDiscoveryService', function () {
     });
 
     it('can find category by script name', function () {
-        $script = new class implements ScriptInterface {
-            public function getName(): string { return 'test-script'; }
-            public function getDescription(): string { return 'Test'; }
-            public function getTags(): array { return []; }
-            public function getCategory(): string { return 'test'; }
-            public function isProductionSafe(): bool { return true; }
-            public function getPreview(): ?string { return null; }
-            public function execute(array $parameters): mixed { return null; }
-            public function getParameters(): array { return []; }
+        $script = new class implements ScriptInterface
+        {
+            public function getName(): string
+            {
+                return 'test-script';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Test';
+            }
+
+            public function getTags(): array
+            {
+                return [];
+            }
+
+            public function getCategory(): string
+            {
+                return 'test';
+            }
+
+            public function isProductionSafe(): bool
+            {
+                return true;
+            }
+
+            public function getPreview(): ?string
+            {
+                return null;
+            }
+
+            public function execute(array $parameters): mixed
+            {
+                return null;
+            }
+
+            public function getParameters(): array
+            {
+                return [];
+            }
         };
 
-        $category = new class($script) implements CategoryInterface {
+        $category = new class($script) implements CategoryInterface
+        {
             public function __construct(private $script) {}
-            public function getName(): string { return 'Test Category'; }
-            public function getDescription(): string { return 'Description'; }
-            public function getIcon(): string { return '🧪'; }
-            public function getSortOrder(): int { return 1; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return [$this->script]; }
+
+            public function getName(): string
+            {
+                return 'Test Category';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description';
+            }
+
+            public function getIcon(): string
+            {
+                return '🧪';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 1;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [$this->script];
+            }
         };
 
         $this->service->registerCategory('test', $category);
@@ -154,13 +403,37 @@ describe('CategoryDiscoveryService', function () {
     });
 
     it('returns null when script not found in any category', function () {
-        $category = new class implements CategoryInterface {
-            public function getName(): string { return 'Empty Category'; }
-            public function getDescription(): string { return 'Description'; }
-            public function getIcon(): string { return '🧪'; }
-            public function getSortOrder(): int { return 1; }
-            public function isEnabled(): bool { return true; }
-            public function getScripts(): array { return []; }
+        $category = new class implements CategoryInterface
+        {
+            public function getName(): string
+            {
+                return 'Empty Category';
+            }
+
+            public function getDescription(): string
+            {
+                return 'Description';
+            }
+
+            public function getIcon(): string
+            {
+                return '🧪';
+            }
+
+            public function getSortOrder(): int
+            {
+                return 1;
+            }
+
+            public function isEnabled(): bool
+            {
+                return true;
+            }
+
+            public function getScripts(): array
+            {
+                return [];
+            }
         };
 
         $this->service->registerCategory('empty', $category);
