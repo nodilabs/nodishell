@@ -22,14 +22,24 @@ class NodiShellServiceProvider extends PackageServiceProvider
         $package
             ->name('nodishell')
             ->hasConfigFile()
+            ->publishesServiceProvider('NodiLabs\\NodiShell\\NodiShellServiceProvider')
             ->hasCommands(
                 [
                     NodiShellCommand::class,
-                    BaseNodiShellGeneratorCommand::class,
                     MakeCategoryCommand::class,
                     MakeScriptCommand::class,
                     MakeCheckCommand::class,
                 ]
             );
+    }
+
+    public function packageBooted(): void
+    {
+        // Register services as singletons
+        $this->app->singleton(Services\CategoryDiscoveryService::class);
+        $this->app->singleton(Services\ScriptDiscoveryService::class);
+        $this->app->singleton(Services\ShellSessionService::class);
+        $this->app->singleton(Services\SystemCheckService::class);
+        $this->app->singleton(Services\AutocompleteService::class);
     }
 }
