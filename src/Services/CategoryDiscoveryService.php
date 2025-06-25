@@ -2,7 +2,6 @@
 
 namespace NodiLabs\NodiShell\Services;
 
-use Illuminate\Support\Collection;
 use NodiLabs\NodiShell\Contracts\CategoryInterface;
 
 class CategoryDiscoveryService

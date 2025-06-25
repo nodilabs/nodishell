@@ -68,6 +68,7 @@ final class NodiShellCommand extends Command implements PromptsForMissingInput
         // Handle direct script execution
         if ($this->option('script')) {
             $this->executeScript($this->option('script'));
+
             return true;
         }
 
