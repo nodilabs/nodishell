@@ -9,7 +9,7 @@ use NodiLabs\NodiShell\Contracts\ScriptInterface;
 class ScriptDiscoveryService
 {
     /**
-     * @var Collection<string, ScriptInterface>|null
+     * @var Collection<int, ScriptInterface>|null
      */
     private ?Collection $scripts = null;
 
@@ -17,13 +17,16 @@ class ScriptDiscoveryService
         private readonly CategoryDiscoveryService $CategoryDiscoveryService
     ) {}
 
+    /**
+     * @return Collection<int, ScriptInterface>
+     */
     public function search(string $query): Collection
     {
         $scripts = $this->getScripts();
 
         return $scripts->filter(function (ScriptInterface $script) use ($query) {
             return str_contains($script->getName(), $query);
-        });
+        })->values();
     }
 
     /**
@@ -37,9 +40,12 @@ class ScriptDiscoveryService
 
         $categories = $this->CategoryDiscoveryService->getAllCategories();
 
-        $this->scripts = collect($categories)->map(function (CategoryInterface $category) {
+        /** @var Collection<int, ScriptInterface> $flattenedScripts */
+        $flattenedScripts = collect($categories)->flatMap(function (CategoryInterface $category) {
             return $category->getScripts();
-        })->flatten();
+        })->values();
+
+        $this->scripts = $flattenedScripts;
 
         return $this->scripts;
     }

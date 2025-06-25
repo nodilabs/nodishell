@@ -12,7 +12,7 @@ class CategoryDiscoveryService
     private bool $initialized = false;
 
     /**
-     * @var Collection<string, CategoryInterface>
+     * @return array<string, CategoryInterface>
      */
     public function getAllCategories(): array
     {

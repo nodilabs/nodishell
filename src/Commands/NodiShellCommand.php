@@ -54,19 +54,21 @@ final class NodiShellCommand extends Command implements PromptsForMissingInput
         private readonly SystemCheckService $systemCheckService
     ) {
         parent::__construct();
-        $this->session = new ShellSessionService;
     }
 
     /**
      * Execute the console command.
      */
-    public function handle(): int
+    public function handle(): bool
     {
+        $this->session = new ShellSessionService;
+
         $this->displayWelcome();
 
         // Handle direct script execution
         if ($this->option('script')) {
-            return $this->executeScript($this->option('script'));
+            $this->executeScript($this->option('script'));
+            return true;
         }
 
         // Handle category start
@@ -77,7 +79,7 @@ final class NodiShellCommand extends Command implements PromptsForMissingInput
         // Start main shell loop
         $this->startShellLoop();
 
-        return self::SUCCESS;
+        return true;
     }
 
     private function displayWelcome(): void
@@ -195,11 +197,6 @@ final class NodiShellCommand extends Command implements PromptsForMissingInput
                     $this->showSearchInterface();
                 }
                 break;
-            case 'model-explorer':
-                if ($features['model_explorer'] ?? true) {
-                    $this->showModelExplorer();
-                }
-                break;
             case 'raw-php':
                 if ($features['raw_php'] ?? true) {
                     $this->executeRawPhp();
@@ -310,7 +307,8 @@ final class NodiShellCommand extends Command implements PromptsForMissingInput
         match ($choice) {
             'tinker' => $this->launchTinker(),
             'inline' => $this->executeInlinePhp(),
-            'back' => null
+            'back' => null,
+            default => null
         };
     }
 
@@ -451,7 +449,7 @@ final class NodiShellCommand extends Command implements PromptsForMissingInput
 
             try {
                 // Execute in closure to have access to variables
-                $closure = function () use ($code, $session, $variables) {
+                $closure = function () use ($code, $variables) {
                     // Extract variables into closure scope
                     foreach ($variables as $name => $value) {
                         $$name = $value;
@@ -520,9 +518,9 @@ final class NodiShellCommand extends Command implements PromptsForMissingInput
                 // Each result from the check becomes a row in the table
                 return collect($checkResults)->map(function (\NodiLabs\NodiShell\Data\CheckResultData $result) use ($check) {
                     return [
-                        'check' => $check->getLabel(),
-                        'status' => $result->successful ? '<info>✔ Pass</info>' : '<error>✘ Fail</error>',
-                        'message' => $result->message,
+                        $check->getLabel(),
+                        $result->successful ? '<info>✔ Pass</info>' : '<e>✘ Fail</e>',
+                        $result->message,
                     ];
                 });
             });
@@ -940,7 +938,8 @@ final class NodiShellCommand extends Command implements PromptsForMissingInput
             'set' => $this->setVariable(),
             'delete' => $this->deleteVariable(),
             'clear' => $this->clearVariables(),
-            'back' => null
+            'back' => null,
+            default => null
         };
     }
 

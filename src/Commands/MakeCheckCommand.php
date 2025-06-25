@@ -63,7 +63,7 @@ class MakeCheckCommand extends BaseNodiShellGeneratorCommand
     /**
      * Execute the console command.
      */
-    public function handle(): int
+    public function handle(): bool
     {
         $name = $this->qualifyClass($this->getNameInput());
 
