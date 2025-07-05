@@ -1,6 +1,6 @@
 # 🚀 NodiShell
 
-**Advanced Laravel Interactive Shell with Autocomplete and Script Repository**
+**Laravel Interactive Shell with Script Repository, System Checks and Laravel Tinker connectivity**
 
 NodiShell is a extensible interactive shell for Laravel applications that provides organized script execution, variable management, system monitoring, and development tools in a beautiful terminal interface.
 
