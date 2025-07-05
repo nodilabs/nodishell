@@ -5,16 +5,13 @@ namespace NodiLabs\NodiShell\Tests\Unit\Services;
 use NodiLabs\NodiShell\Services\ShellSessionService;
 
 describe('ShellSessionService', function () {
-    beforeEach(function () {
-        $this->service = new ShellSessionService;
-    });
-
     describe('History Management', function () {
         it('can add commands to history', function () {
-            $this->service->addToHistory('command1');
-            $this->service->addToHistory('command2');
+            $service = new ShellSessionService;
+            $service->addToHistory('command1');
+            $service->addToHistory('command2');
 
-            expect($this->service->getHistory())->toBe(['command1', 'command2']);
+            expect($service->getHistory())->toBe(['command1', 'command2']);
         });
 
         it('maintains history limit', function () {
@@ -32,125 +29,139 @@ describe('ShellSessionService', function () {
         });
 
         it('can clear history', function () {
-            $this->service->addToHistory('command1');
-            $this->service->addToHistory('command2');
+            $service = new ShellSessionService;
+            $service->addToHistory('command1');
+            $service->addToHistory('command2');
 
-            $this->service->clearHistory();
+            $service->clearHistory();
 
-            expect($this->service->getHistory())->toBe([]);
+            expect($service->getHistory())->toBe([]);
         });
     });
 
     describe('Variable Management', function () {
         it('can set and get variables', function () {
-            $this->service->setVariable('name', 'John');
-            $this->service->setVariable('age', 30);
+            $service = new ShellSessionService;
+            $service->setVariable('name', 'John');
+            $service->setVariable('age', 30);
 
-            expect($this->service->getVariable('name'))->toBe('John');
-            expect($this->service->getVariable('age'))->toBe(30);
+            expect($service->getVariable('name'))->toBe('John');
+            expect($service->getVariable('age'))->toBe(30);
         });
 
         it('returns null for non-existent variables', function () {
-            expect($this->service->getVariable('non_existent'))->toBeNull();
+            $service = new ShellSessionService;
+            expect($service->getVariable('non_existent'))->toBeNull();
         });
 
         it('can check if variable exists', function () {
-            $this->service->setVariable('name', 'John');
+            $service = new ShellSessionService;
+            $service->setVariable('name', 'John');
 
-            expect($this->service->hasVariable('name'))->toBeTrue();
-            expect($this->service->hasVariable('non_existent'))->toBeFalse();
+            expect($service->hasVariable('name'))->toBeTrue();
+            expect($service->hasVariable('non_existent'))->toBeFalse();
         });
 
         it('can handle null values', function () {
-            $this->service->setVariable('null_var', null);
+            $service = new ShellSessionService;
+            $service->setVariable('null_var', null);
 
-            expect($this->service->hasVariable('null_var'))->toBeTrue();
-            expect($this->service->getVariable('null_var'))->toBeNull();
+            expect($service->hasVariable('null_var'))->toBeTrue();
+            expect($service->getVariable('null_var'))->toBeNull();
         });
 
         it('can remove variables', function () {
-            $this->service->setVariable('name', 'John');
-            expect($this->service->hasVariable('name'))->toBeTrue();
+            $service = new ShellSessionService;
+            $service->setVariable('name', 'John');
+            expect($service->hasVariable('name'))->toBeTrue();
 
-            $this->service->removeVariable('name');
-            expect($this->service->hasVariable('name'))->toBeFalse();
+            $service->removeVariable('name');
+            expect($service->hasVariable('name'))->toBeFalse();
         });
 
         it('can get all variables', function () {
-            $this->service->setVariable('name', 'John');
-            $this->service->setVariable('age', 30);
+            $service = new ShellSessionService;
+            $service->setVariable('name', 'John');
+            $service->setVariable('age', 30);
 
-            $variables = $this->service->getAllVariables();
+            $variables = $service->getAllVariables();
             expect($variables)->toBe(['name' => 'John', 'age' => 30]);
         });
 
         it('can clear all variables', function () {
-            $this->service->setVariable('name', 'John');
-            $this->service->setVariable('age', 30);
+            $service = new ShellSessionService;
+            $service->setVariable('name', 'John');
+            $service->setVariable('age', 30);
 
-            $this->service->clearVariables();
+            $service->clearVariables();
 
-            expect($this->service->getAllVariables())->toBe([]);
+            expect($service->getAllVariables())->toBe([]);
         });
 
         it('can handle various data types', function () {
-            $this->service->setVariable('string', 'test');
-            $this->service->setVariable('integer', 42);
-            $this->service->setVariable('float', 3.14);
-            $this->service->setVariable('boolean', true);
-            $this->service->setVariable('array', [1, 2, 3]);
-            $this->service->setVariable('object', (object) ['key' => 'value']);
+            $service = new ShellSessionService;
+            $service->setVariable('string', 'test');
+            $service->setVariable('integer', 42);
+            $service->setVariable('float', 3.14);
+            $service->setVariable('boolean', true);
+            $service->setVariable('array', [1, 2, 3]);
+            $service->setVariable('object', (object) ['key' => 'value']);
 
-            expect($this->service->getVariable('string'))->toBe('test');
-            expect($this->service->getVariable('integer'))->toBe(42);
-            expect($this->service->getVariable('float'))->toBe(3.14);
-            expect($this->service->getVariable('boolean'))->toBeTrue();
-            expect($this->service->getVariable('array'))->toBe([1, 2, 3]);
-            expect($this->service->getVariable('object'))->toEqual((object) ['key' => 'value']);
+            expect($service->getVariable('string'))->toBe('test');
+            expect($service->getVariable('integer'))->toBe(42);
+            expect($service->getVariable('float'))->toBe(3.14);
+            expect($service->getVariable('boolean'))->toBeTrue();
+            expect($service->getVariable('array'))->toBe([1, 2, 3]);
+            expect($service->getVariable('object'))->toEqual((object) ['key' => 'value']);
         });
     });
 
     describe('Context Management', function () {
         it('can set and get context', function () {
-            $this->service->setContext('current_user', 123);
-            $this->service->setContext('environment', 'testing');
+            $service = new ShellSessionService;
+            $service->setContext('current_user', 123);
+            $service->setContext('environment', 'testing');
 
-            expect($this->service->getContext('current_user'))->toBe(123);
-            expect($this->service->getContext('environment'))->toBe('testing');
+            expect($service->getContext('current_user'))->toBe(123);
+            expect($service->getContext('environment'))->toBe('testing');
         });
 
         it('returns null for non-existent context', function () {
-            expect($this->service->getContext('non_existent'))->toBeNull();
+            $service = new ShellSessionService;
+            expect($service->getContext('non_existent'))->toBeNull();
         });
 
         it('can get all context', function () {
-            $this->service->setContext('user', 123);
-            $this->service->setContext('env', 'test');
+            $service = new ShellSessionService;
+            $service->setContext('user', 123);
+            $service->setContext('env', 'test');
 
-            $context = $this->service->getAllContext();
+            $context = $service->getAllContext();
             expect($context)->toBe(['user' => 123, 'env' => 'test']);
         });
 
         it('can clear context', function () {
-            $this->service->setContext('user', 123);
+            $service = new ShellSessionService;
+            $service->setContext('user', 123);
 
-            $this->service->clearContext();
+            $service->clearContext();
 
-            expect($this->service->getAllContext())->toBe([]);
+            expect($service->getAllContext())->toBe([]);
         });
     });
 
     describe('Reset Functionality', function () {
         it('can reset all data', function () {
-            $this->service->addToHistory('command1');
-            $this->service->setVariable('name', 'John');
-            $this->service->setContext('user', 123);
+            $service = new ShellSessionService;
+            $service->addToHistory('command1');
+            $service->setVariable('name', 'John');
+            $service->setContext('user', 123);
 
-            $this->service->reset();
+            $service->reset();
 
-            expect($this->service->getHistory())->toBe([]);
-            expect($this->service->getAllVariables())->toBe([]);
-            expect($this->service->getAllContext())->toBe([]);
+            expect($service->getHistory())->toBe([]);
+            expect($service->getAllVariables())->toBe([]);
+            expect($service->getAllContext())->toBe([]);
         });
     });
 });
