@@ -57,6 +57,7 @@ NodiShell is a powerful, extensible interactive shell for Laravel applications t
   - [🐛 Troubleshooting](#-troubleshooting)
     - [Common Issues](#common-issues)
     - [Debug Mode](#debug-mode)
+  - [📸 Screenshots](#-screenshots)
   - [📄 License](#-license)
   - [🙋‍♂️ Support](#️-support)
 
@@ -857,13 +858,27 @@ class ResetUserPasswordScript implements ScriptInterface
 - Verify checks implement `SystemCheckInterface`
 - Check that the `run()` method returns an array of `CheckResultData`
 
-### Debug Mode
+## 📸 Screenshots
 
-Enable debug logging by setting:
+### Main menu
 
-```env
-LOG_LEVEL=debug
-```
+![main-menu](https://github.com/user-attachments/assets/d5b0bcb1-c797-4514-a663-68a0b3b4e651)
+
+### Search scripts and operations
+
+![search](https://github.com/user-attachments/assets/26870ed2-5ae0-4fa0-ace0-2c8355bbe660)
+
+### Script execution
+
+![script execution](https://github.com/user-attachments/assets/18a4bd6f-db7d-4acd-b628-aefbcc73b8c5)
+
+### Laravel Tinker
+
+![tinker-nodishell](https://github.com/user-attachments/assets/0205b7a0-e8cf-4324-9551-723d211927c7)
+
+### Tinker variable access
+
+![tinker-result-vars](https://github.com/user-attachments/assets/a3ed66cd-e613-4b45-a8f3-6634f232cce7)
 
 ## 📄 License
 
