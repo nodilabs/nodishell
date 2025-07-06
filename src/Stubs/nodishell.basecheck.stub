@@ -1,0 +1,31 @@
+<?php
+
+
+
+namespace {{ namespace }};
+
+use {{ baseClassNamespace }};
+
+final class {{ class }} extends BaseSystemCheck
+{
+    protected string $label = '{{ label }}';
+    protected string $description = '{{ description }}';
+
+    public function run(): array
+    {
+        return $this->safeCheck(function () {
+            // Your check logic here
+
+            // Example: Check if a service is running
+            $isWorking = true; // Replace with actual check
+
+            return [
+                $this->check(
+                    condition: $isWorking,
+                    successMessage: $this->label . ': OK',
+                    failureMessage: $this->label . ': FAILED'
+                )
+            ];
+        });
+    }
+}

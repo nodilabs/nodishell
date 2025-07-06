@@ -76,11 +76,6 @@ describe('Service Integration', function () {
                 return true;
             }
 
-            public function getPreview(): ?string
-            {
-                return null;
-            }
-
             public function getParameters(): array
             {
                 return [];

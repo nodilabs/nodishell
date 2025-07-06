@@ -67,7 +67,7 @@ class MakeScriptCommand extends BaseNodiShellGeneratorCommand
             'category' => $category,
             'productionSafe' => $productionSafe,
             'tags' => $tags,
-            'baseClassNamespace' => 'App\\Console\\NodiShell\\Scripts\\BaseScript',
+            'baseClassNamespace' => 'NodiLabs\\NodiShell\\Abstracts\\BaseScript',
         ];
     }
 

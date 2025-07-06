@@ -14,8 +14,6 @@ interface ScriptInterface
 
     public function isProductionSafe(): bool;
 
-    public function getPreview(): ?string;
-
     public function execute(array $parameters): mixed;
 
     public function getParameters(): array;

@@ -18,7 +18,6 @@ describe('Contracts', function () {
                 tags: ['test', 'automation'],
                 category: 'testing',
                 productionSafe: true,
-                preview: 'This is a preview',
                 parameters: [
                     ['name' => 'param1', 'label' => 'Parameter 1', 'required' => true],
                     ['name' => 'param2', 'label' => 'Parameter 2', 'required' => false],
@@ -35,7 +34,6 @@ describe('Contracts', function () {
             expect($this->script->getTags())->toBe(['test', 'automation']);
             expect($this->script->getCategory())->toBe('testing');
             expect($this->script->isProductionSafe())->toBeTrue();
-            expect($this->script->getPreview())->toBe('This is a preview');
             expect($this->script->getParameters())->toHaveCount(2);
         });
 
