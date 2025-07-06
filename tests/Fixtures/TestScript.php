@@ -12,7 +12,6 @@ class TestScript implements ScriptInterface
         private array $tags = ['test'],
         private string $category = 'test',
         private bool $productionSafe = false,
-        private ?string $preview = null,
         private array $parameters = [],
         private mixed $executeResult = ['success' => true]
     ) {}
@@ -40,11 +39,6 @@ class TestScript implements ScriptInterface
     public function isProductionSafe(): bool
     {
         return $this->productionSafe;
-    }
-
-    public function getPreview(): ?string
-    {
-        return $this->preview;
     }
 
     public function execute(array $parameters): mixed

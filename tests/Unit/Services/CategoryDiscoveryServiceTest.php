@@ -345,11 +345,6 @@ describe('CategoryDiscoveryService', function () {
                 return true;
             }
 
-            public function getPreview(): ?string
-            {
-                return null;
-            }
-
             public function execute(array $parameters): mixed
             {
                 return null;

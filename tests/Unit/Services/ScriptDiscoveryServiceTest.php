@@ -40,11 +40,6 @@ describe('ScriptDiscoveryService', function () {
                 return false;
             }
 
-            public function getPreview(): ?string
-            {
-                return null;
-            }
-
             public function execute(array $parameters): mixed
             {
                 return null;
@@ -83,11 +78,6 @@ describe('ScriptDiscoveryService', function () {
                 return false;
             }
 
-            public function getPreview(): ?string
-            {
-                return null;
-            }
-
             public function execute(array $parameters): mixed
             {
                 return null;
@@ -124,11 +114,6 @@ describe('ScriptDiscoveryService', function () {
             public function isProductionSafe(): bool
             {
                 return true;
-            }
-
-            public function getPreview(): ?string
-            {
-                return null;
             }
 
             public function execute(array $parameters): mixed
@@ -299,11 +284,6 @@ describe('ScriptDiscoveryService', function () {
             public function isProductionSafe(): bool
             {
                 return false;
-            }
-
-            public function getPreview(): ?string
-            {
-                return null;
             }
 
             public function execute(array $parameters): mixed

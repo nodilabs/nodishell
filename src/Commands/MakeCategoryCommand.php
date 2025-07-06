@@ -66,7 +66,7 @@ class MakeCategoryCommand extends BaseNodiShellGeneratorCommand
             'icon' => $icon,
             'color' => $color,
             'sortOrder' => $sortOrder,
-            'baseClassNamespace' => 'App\\Console\\NodiShell\\Categories\\BaseCategory',
+            'baseClassNamespace' => 'NodiLabs\\NodiShell\\Abstracts\\BaseCategory',
         ];
     }
 
