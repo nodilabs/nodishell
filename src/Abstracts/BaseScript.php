@@ -7,10 +7,15 @@ use NodiLabs\NodiShell\Contracts\ScriptInterface;
 abstract class BaseScript implements ScriptInterface
 {
     protected string $name = '';
+
     protected string $description = '';
+
     protected string $category = '';
+
     protected bool $productionSafe = false;
+
     protected array $parameters = [];
+
     protected array $tags = [];
 
     public function getName(): string
@@ -71,6 +76,7 @@ abstract class BaseScript implements ScriptInterface
     protected function getVariable(array $parameters, string $name, mixed $default = null): mixed
     {
         $variables = $this->getVariables($parameters);
+
         return $variables[$name] ?? $default;
     }
 
@@ -104,7 +110,7 @@ abstract class BaseScript implements ScriptInterface
     protected function validateParameters(array $parameters, array $required = []): void
     {
         foreach ($required as $param) {
-            if (!array_key_exists($param, $parameters) || empty($parameters[$param])) {
+            if (! array_key_exists($param, $parameters) || empty($parameters[$param])) {
                 throw new \InvalidArgumentException("Required parameter '{$param}' is missing or empty");
             }
         }

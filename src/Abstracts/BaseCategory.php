@@ -8,12 +8,19 @@ use NodiLabs\NodiShell\Contracts\ScriptInterface;
 abstract class BaseCategory implements CategoryInterface
 {
     protected string $name = '';
+
     protected string $description = '';
+
     protected string $icon = '📁';
+
     protected string $color = 'blue';
+
     protected int $sortOrder = 100;
+
     protected bool $enabled = true;
+
     protected array $scripts = [];
+
     protected bool $scriptsLoaded = false;
 
     public function getName(): string
@@ -48,7 +55,7 @@ abstract class BaseCategory implements CategoryInterface
 
     public function getScripts(): array
     {
-        if (!$this->scriptsLoaded) {
+        if (! $this->scriptsLoaded) {
             $this->loadScripts();
             $this->scriptsLoaded = true;
         }
@@ -138,6 +145,7 @@ abstract class BaseCategory implements CategoryInterface
                 return $script;
             }
         }
+
         return null;
     }
 
@@ -147,6 +155,7 @@ abstract class BaseCategory implements CategoryInterface
     public function searchScripts(string $query): array
     {
         $query = strtolower($query);
+
         return array_filter($this->getScripts(), function (ScriptInterface $script) use ($query) {
             return str_contains(strtolower($script->getName()), $query) ||
                    str_contains(strtolower($script->getDescription()), $query);

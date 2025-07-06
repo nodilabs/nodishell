@@ -2,14 +2,15 @@
 
 namespace NodiLabs\NodiShell\Abstracts;
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use NodiLabs\NodiShell\Contracts\SystemCheckInterface;
 use NodiLabs\NodiShell\Data\CheckResultData;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cache;
 
 abstract class BaseSystemCheck implements SystemCheckInterface
 {
     protected string $label = '';
+
     protected string $description = '';
 
     public function getLabel(): string
@@ -68,7 +69,7 @@ abstract class BaseSystemCheck implements SystemCheckInterface
         try {
             return $checkFunction();
         } catch (\Exception $e) {
-            return [$this->failure($this->getLabel() . ': FAILED - ' . $e->getMessage())];
+            return [$this->failure($this->getLabel().': FAILED - '.$e->getMessage())];
         }
     }
 
@@ -101,13 +102,14 @@ abstract class BaseSystemCheck implements SystemCheckInterface
         return is_dir($directoryPath) && is_writable($directoryPath);
     }
 
-        /**
+    /**
      * Helper method to check database connectivity.
      */
     protected function isDatabaseConnected(): bool
     {
         try {
             DB::connection()->getPdo();
+
             return true;
         } catch (\Exception $e) {
             return false;
@@ -117,11 +119,11 @@ abstract class BaseSystemCheck implements SystemCheckInterface
     /**
      * Helper method to check if a cache store is working.
      */
-    protected function isCacheWorking(string $store = null): bool
+    protected function isCacheWorking(?string $store = null): bool
     {
         try {
             $cache = $store ? Cache::store($store) : Cache::store();
-            $testKey = 'nodishell_cache_test_' . time();
+            $testKey = 'nodishell_cache_test_'.time();
             $testValue = 'test_value';
 
             $cache->put($testKey, $testValue, 60);
@@ -140,7 +142,8 @@ abstract class BaseSystemCheck implements SystemCheckInterface
     protected function isConfigSet(string $key): bool
     {
         $value = \config($key);
-        return !is_null($value) && $value !== '';
+
+        return ! is_null($value) && $value !== '';
     }
 
     /**
@@ -151,6 +154,7 @@ abstract class BaseSystemCheck implements SystemCheckInterface
         try {
             $freeSpace = disk_free_space($path);
             $requiredSpace = $minSpaceGB * 1024 * 1024 * 1024; // Convert GB to bytes
+
             return $freeSpace >= $requiredSpace;
         } catch (\Exception $e) {
             return false;
@@ -168,6 +172,6 @@ abstract class BaseSystemCheck implements SystemCheckInterface
             $bytes /= 1024;
         }
 
-        return round($bytes, $precision) . ' ' . $units[$i];
+        return round($bytes, $precision).' '.$units[$i];
     }
 }

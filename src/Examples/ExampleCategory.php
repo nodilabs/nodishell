@@ -11,16 +11,21 @@ use NodiLabs\NodiShell\Abstracts\BaseCategory;
 final class ExampleCategory extends BaseCategory
 {
     protected string $name = 'Examples';
+
     protected string $description = 'Example scripts demonstrating NodiShell functionality';
+
     protected string $icon = '📚';
+
     protected string $color = 'green';
+
     protected int $sortOrder = 10;
+
     protected bool $enabled = true;
 
     protected function loadScripts(): void
     {
         // Add scripts using helper methods
-        $this->addScript(new ExampleScript());
+        $this->addScript(new ExampleScript);
 
         // You can also add multiple scripts at once
         // $this->addScripts([

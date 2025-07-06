@@ -11,9 +11,13 @@ use NodiLabs\NodiShell\Abstracts\BaseScript;
 final class ExampleScript extends BaseScript
 {
     protected string $name = 'example-script';
+
     protected string $description = 'An example script demonstrating BaseScript functionality';
+
     protected string $category = 'examples';
+
     protected bool $productionSafe = true;
+
     protected array $tags = ['example', 'demo', 'tutorial'];
 
     protected array $parameters = [
@@ -65,11 +69,11 @@ final class ExampleScript extends BaseScript
 
         } catch (\InvalidArgumentException $e) {
             // Return error using helper method
-            return $this->error("Validation failed: " . $e->getMessage());
+            return $this->error('Validation failed: '.$e->getMessage());
 
         } catch (\Exception $e) {
             // Return error using helper method
-            return $this->error("An error occurred: " . $e->getMessage());
+            return $this->error('An error occurred: '.$e->getMessage());
         }
     }
 }

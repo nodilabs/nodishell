@@ -11,6 +11,7 @@ use NodiLabs\NodiShell\Abstracts\BaseSystemCheck;
 final class ExampleSystemCheck extends BaseSystemCheck
 {
     protected string $label = 'Example System Check';
+
     protected string $description = 'An example system check demonstrating BaseSystemCheck functionality';
 
     public function run(): array
@@ -48,7 +49,7 @@ final class ExampleSystemCheck extends BaseSystemCheck
             $results[] = $this->check(
                 condition: $logDirWritable,
                 successMessage: 'Log directory is writable',
-                failureMessage: 'Log directory is not writable: ' . $logDir
+                failureMessage: 'Log directory is not writable: '.$logDir
             );
 
             // Example 5: Check disk space
