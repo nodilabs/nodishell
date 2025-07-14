@@ -85,7 +85,7 @@ class CategoryDiscoveryService
     public function discover(): void
     {
         $categoryPath = config('nodishell.discovery.categories_path');
-        $baseNamespace = 'App\\Console\\NodiShell\\Categories';
+
 
         if (! file_exists($categoryPath)) {
             // Or log a warning, depending on desired behavior
@@ -100,9 +100,10 @@ class CategoryDiscoveryService
             }
 
             $className = $file->getBasename('.php');
-            $fqcn = $baseNamespace.'\\'.$className;
+            $fqcn = $this->getNamespaceFromFile($categoryPath.DIRECTORY_SEPARATOR.$file->getBasename('.php').'.php').'\\'.$className;
 
             if (class_exists($fqcn)) {
+
                 $reflection = new \ReflectionClass($fqcn);
 
                 if ($reflection->isInstantiable() && $reflection->implementsInterface(CategoryInterface::class)) {
