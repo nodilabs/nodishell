@@ -78,12 +78,8 @@ abstract class BaseSystemCheck implements SystemCheckInterface
      */
     protected function isServiceRunning(string $serviceName): bool
     {
-        try {
-            // Basic service check - can be extended based on needs
-            return true; // Placeholder - implement based on your system
-        } catch (\Exception $e) {
-            return false;
-        }
+        // Basic service check - can be extended based on needs
+        return true; // Placeholder - implement based on your system
     }
 
     /**

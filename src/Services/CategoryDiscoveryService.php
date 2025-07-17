@@ -86,7 +86,6 @@ class CategoryDiscoveryService
     {
         $categoryPath = config('nodishell.discovery.categories_path');
 
-
         if (! file_exists($categoryPath)) {
             // Or log a warning, depending on desired behavior
             return;
