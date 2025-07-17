@@ -1,5 +1,13 @@
 # 🚀 NodiShell
 
+[![Tests](https://github.com/nodilabs/nodishell/actions/workflows/run-tests.yml/badge.svg)](https://github.com/nodilabs/nodishell/actions/workflows/run-tests.yml)
+[![PHPStan](https://github.com/nodilabs/nodishell/actions/workflows/phpstan.yml/badge.svg)](https://github.com/nodilabs/nodishell/actions/workflows/phpstan.yml)
+[![Code Style](https://github.com/nodilabs/nodishell/actions/workflows/fix-php-code-style-issues.yml/badge.svg)](https://github.com/nodilabs/nodishell/actions/workflows/fix-php-code-style-issues.yml)
+[![Latest Stable Version](https://img.shields.io/packagist/v/nodilabs/nodishell?label=version)](https://packagist.org/packages/nodilabs/nodishell)
+[![php](https://img.shields.io/packagist/php-v/nodilabs/nodishell)](https://packagist.org/packages/nodilabs/nodishell)
+
+---
+
 **Laravel Interactive Shell with Script Repository, System Checks and Laravel Tinker connectivity**
 
 NodiShell is a extensible interactive shell for Laravel applications that provides organized script execution, variable management, system monitoring, and development tools in a beautiful terminal interface.
