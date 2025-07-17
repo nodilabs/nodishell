@@ -2,11 +2,13 @@
 
 namespace NodiLabs\NodiShell\Services;
 
+use Exception;
+
 class BaseDiscoveryService
 {
-    function getNamespaceFromFile($filePath)
+    public function getNamespaceFromFile($filePath)
     {
-        if (!file_exists($filePath)) {
+        if (! file_exists($filePath)) {
             throw new Exception('File not found');
         }
 

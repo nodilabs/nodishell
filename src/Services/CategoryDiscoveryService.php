@@ -4,7 +4,7 @@ namespace NodiLabs\NodiShell\Services;
 
 use NodiLabs\NodiShell\Contracts\CategoryInterface;
 
-class CategoryDiscoveryService
+class CategoryDiscoveryService extends BaseDiscoveryService
 {
     private array $categories = [];
 
@@ -85,7 +85,6 @@ class CategoryDiscoveryService
     public function discover(): void
     {
         $categoryPath = config('nodishell.discovery.categories_path');
-
 
         if (! file_exists($categoryPath)) {
             // Or log a warning, depending on desired behavior
