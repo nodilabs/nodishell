@@ -2,6 +2,8 @@
 
 namespace NodiLabs\NodiShell\Services;
 
+use Exception;
+
 class BaseDiscoveryService
 {
     public function getNamespaceFromFile($filePath)

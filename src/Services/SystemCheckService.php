@@ -5,7 +5,7 @@ namespace NodiLabs\NodiShell\Services;
 use Illuminate\Support\Collection;
 use NodiLabs\NodiShell\Contracts\SystemCheckInterface;
 
-final class SystemCheckService
+final class SystemCheckService extends BaseDiscoveryService
 {
     private array $checks = [];
 
@@ -59,7 +59,6 @@ final class SystemCheckService
     private function discover(): void
     {
         $checksPath = config('nodishell.discovery.checks_path');
-        $baseNamespace = 'App\\Console\\NodiShell\\Checks';
 
         if (! $checksPath || ! file_exists($checksPath)) {
             return;
@@ -73,7 +72,7 @@ final class SystemCheckService
             }
 
             $className = $file->getBasename('.php');
-            $fqcn = $baseNamespace.'\\'.$className;
+            $fqcn = $this->getNamespaceFromFile($checksPath.DIRECTORY_SEPARATOR.$file->getBasename('.php').'.php').'\\'.$className;
 
             if (class_exists($fqcn)) {
                 $reflection = new \ReflectionClass($fqcn);

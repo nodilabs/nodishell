@@ -4,7 +4,7 @@ namespace NodiLabs\NodiShell\Services;
 
 use NodiLabs\NodiShell\Contracts\CategoryInterface;
 
-class CategoryDiscoveryService
+class CategoryDiscoveryService extends BaseDiscoveryService
 {
     private array $categories = [];
 
